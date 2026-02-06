@@ -21,6 +21,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.catalog.ProductCatalogActivity" />
+
+        <activity android:name=".ui.auth.CreateAccountActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="false" />
