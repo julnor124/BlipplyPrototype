@@ -45,9 +45,29 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="24dp"
         android:contentDescription="View Cart"
-        android:src="@android:drawable/ic_menu_view"
+        android:src="@drawable/ic_cart"
         android:backgroundTint="@color/button_primary"
         android:tint="@color/button_primary_text"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textCartCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/fabCart"
+        android:layout_alignEnd="@id/fabCart"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/badge_cart_count"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:minWidth="20dp"
+        android:minHeight="20dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="12sp"
         android:visibility="gone" />
 
 </RelativeLayout>
