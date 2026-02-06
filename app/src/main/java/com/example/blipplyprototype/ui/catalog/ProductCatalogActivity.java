@@ -1,6 +1,7 @@
-// ui/catalog/ProductCatalogActivity.java
+// ui/catalog/ProductCatalogActivity.java (only the FAB click changes)
 package com.example.blipplyprototype.ui.catalog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -14,14 +15,14 @@ import com.example.blipplyprototype.data.mock.MockDataSource;
 import com.example.blipplyprototype.data.model.Product;
 import com.example.blipplyprototype.data.repository.CartRepository;
 import com.example.blipplyprototype.data.repository.CatalogRepository;
+import com.example.blipplyprototype.ui.cart.CartActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 public class ProductCatalogActivity extends AppCompatActivity {
 
-    // Simple prototype state holder (keeps cart while app process lives)
-    private static final CartRepository cartRepository = new CartRepository();
+    private final CartRepository cartRepository = CartRepository.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,11 +45,7 @@ public class ProductCatalogActivity extends AppCompatActivity {
 
         recycler.setAdapter(adapter);
 
-        // For this commit: no cart screen yet
-        fabCart.setOnClickListener(v -> {
-            int count = cartRepository.getItems().size();
-            Toast.makeText(this, "Cart items: " + count, Toast.LENGTH_SHORT).show();
-        });
+        fabCart.setOnClickListener(v -> startActivity(new Intent(this, CartActivity.class)));
 
         updateCartFab(fabCart);
     }

@@ -9,7 +9,16 @@ import java.util.List;
 
 public class CartRepository {
 
+    private static final CartRepository INSTANCE = new CartRepository();
+
     private final List<CartItem> items = new ArrayList<>();
+
+    private CartRepository() {
+    }
+
+    public static CartRepository getInstance() {
+        return INSTANCE;
+    }
 
     public List<CartItem> getItems() {
         return Collections.unmodifiableList(items);

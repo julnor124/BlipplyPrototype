@@ -23,6 +23,8 @@
 
         <activity android:name=".ui.catalog.ProductCatalogActivity" />
 
+        <activity android:name=".ui.cart.CartActivity" />
+
         <activity android:name=".ui.auth.CreateAccountActivity" />
 
         <activity
