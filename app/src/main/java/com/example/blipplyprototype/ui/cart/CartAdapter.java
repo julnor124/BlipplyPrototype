@@ -46,11 +46,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         CartItem item = items.get(position);
 
         holder.name.setText(item.getProduct().getName());
-        holder.unitPrice.setText(String.format(Locale.US, "R %.2f", item.getProduct().getPriceCents() / 100.0));
+        holder.unitPrice.setText(String.format(Locale.US, "KSh %.2f", item.getProduct().getPriceCents() / 100.0));
         holder.quantity.setText(String.valueOf(item.getQuantity()));
 
         double lineTotal = (item.getProduct().getPriceCents() * item.getQuantity()) / 100.0;
-        holder.lineTotal.setText(String.format(Locale.US, "R %.2f", lineTotal));
+        holder.lineTotal.setText(String.format(Locale.US, "KSh %.2f", lineTotal));
 
         holder.plus.setOnClickListener(v -> {
             if (listener != null) listener.onIncrease(item);

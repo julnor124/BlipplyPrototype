@@ -88,7 +88,7 @@ public class CartActivity extends AppCompatActivity {
             textEmpty.setVisibility(View.GONE);
             bottomSection.setVisibility(View.VISIBLE);
 
-            textTotal.setText(String.format(Locale.US, "R %.2f", cartRepository.getTotalCents() / 100.0));
+            textTotal.setText(String.format(Locale.US, "KSh %.2f", cartRepository.getTotalCents() / 100.0));
         }
 
         adapter.notifyDataSetChanged();

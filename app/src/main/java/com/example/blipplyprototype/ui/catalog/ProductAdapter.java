@@ -43,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = products.get(position);
 
         holder.name.setText(product.getName());
-        holder.price.setText(String.format(Locale.US, "R %.2f", product.getPriceCents() / 100.0));
+        holder.price.setText(String.format(Locale.US, "KSh %.2f", product.getPriceCents() / 100.0));
 
         holder.addButton.setOnClickListener(v -> {
             if (onAddClicked != null) onAddClicked.onAdd(product);

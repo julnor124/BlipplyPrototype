@@ -61,7 +61,7 @@ public class OrderSummaryActivity extends AppCompatActivity {
 
         if (order.getCreditUsedCents() != null) {
             creditSection.setVisibility(View.VISIBLE);
-            creditUsedText.setText(String.format(Locale.US, "R %.2f", order.getCreditUsedCents() / 100.0));
+            creditUsedText.setText(String.format(Locale.US, "KSh %.2f", order.getCreditUsedCents() / 100.0));
         } else {
             creditSection.setVisibility(View.GONE);
         }
@@ -69,7 +69,7 @@ public class OrderSummaryActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new OrderItemAdapter(order.getItems()));
 
-        totalText.setText(String.format(Locale.US, "R %.2f", order.getTotalCents() / 100.0));
+        totalText.setText(String.format(Locale.US, "KSh %.2f", order.getTotalCents() / 100.0));
 
         // Optional: clear cart after order is placed
         cartRepository.clear();

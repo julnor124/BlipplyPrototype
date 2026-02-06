@@ -36,7 +36,7 @@
                 android:id="@+id/textUnitPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="R 45.50"
+                android:text="KSh 45.50"
                 android:textColor="@color/text_primary"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="R 45.50"
+            android:text="KSh 45.50"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
             android:textStyle="bold"

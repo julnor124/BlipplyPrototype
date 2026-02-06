@@ -38,7 +38,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.VH> 
         holder.qty.setText("Qty " + item.getQuantity());
 
         double lineTotal = (item.getProduct().getPriceCents() * item.getQuantity()) / 100.0;
-        holder.lineTotal.setText(String.format(Locale.US, "R %.2f", lineTotal));
+        holder.lineTotal.setText(String.format(Locale.US, "KSh %.2f", lineTotal));
     }
 
     @Override

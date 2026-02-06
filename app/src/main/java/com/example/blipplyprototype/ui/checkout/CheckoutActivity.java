@@ -28,8 +28,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private PaymentMethod selectedMethod = null;
 
     // Mock credit
-    private final int availableCreditCents = 500000; // R 5000.00
-    private final int usedCreditCents = 125000;      // R 1250.00
+    private final int availableCreditCents = 500000; // KSh 5000.00
+    private final int usedCreditCents = 125000;      // KSh 1250.00
     private int remainingCreditCents;
 
     private Button placeOrder;
@@ -82,11 +82,11 @@ public class CheckoutActivity extends AppCompatActivity {
         back.setOnClickListener(v -> finish());
 
         int totalCents = cartRepository.getTotalCents();
-        totalText.setText(String.format(Locale.US, "R %.2f", totalCents / 100.0));
+        totalText.setText(String.format(Locale.US, "KSh %.2f", totalCents / 100.0));
 
-        availableCredit.setText(String.format(Locale.US, "R %.2f", availableCreditCents / 100.0));
-        usedCredit.setText(String.format(Locale.US, "R %.2f", usedCreditCents / 100.0));
-        remainingCredit.setText(String.format(Locale.US, "R %.2f", remainingCreditCents / 100.0));
+        availableCredit.setText(String.format(Locale.US, "KSh %.2f", availableCreditCents / 100.0));
+        usedCredit.setText(String.format(Locale.US, "KSh %.2f", usedCreditCents / 100.0));
+        remainingCredit.setText(String.format(Locale.US, "KSh %.2f", remainingCreditCents / 100.0));
 
         optionAdvance.setOnClickListener(v -> select(PaymentMethod.ADVANCE));
         optionCredit.setOnClickListener(v -> select(PaymentMethod.CREDIT));
@@ -164,13 +164,13 @@ public class CheckoutActivity extends AppCompatActivity {
         if (recommendation == PaymentMethod.CREDIT) {
             return String.format(
                     Locale.US,
-                    "Your total is R %.2f and you have R %.2f credit available. Using credit keeps your cash flow flexible and you have sufficient coverage.",
+                    "Your total is KSh %.2f and you have KSh %.2f credit available. Using credit keeps your cash flow flexible and you have sufficient coverage.",
                     total, remaining
             );
         } else {
             return String.format(
                     Locale.US,
-                    "Your total is R %.2f and you have R %.2f credit available. I recommend advance payment to avoid partial credit coverage and simplify reconciliation. If you prefer to use credit, expect an insufficient credit status and a remaining amount due.",
+                    "Your total is KSh %.2f and you have KSh %.2f credit available. I recommend advance payment to avoid partial credit coverage and simplify reconciliation. If you prefer to use credit, expect an insufficient credit status and a remaining amount due.",
                     total, remaining
             );
         }
