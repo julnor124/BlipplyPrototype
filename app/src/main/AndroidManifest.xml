@@ -25,6 +25,8 @@
 
         <activity android:name=".ui.cart.CartActivity" />
 
+        <activity android:name=".ui.checkout.CheckoutActivity" />
+
         <activity android:name=".ui.auth.CreateAccountActivity" />
 
         <activity
