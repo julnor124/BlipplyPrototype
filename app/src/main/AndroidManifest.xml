@@ -29,6 +29,8 @@
 
         <activity android:name=".ui.orders.OrderSummaryActivity" />
 
+        <activity android:name=".ui.profile.ProfileActivity" />
+
         <activity android:name=".ui.auth.CreateAccountActivity" />
 
         <activity
