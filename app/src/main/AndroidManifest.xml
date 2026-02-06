@@ -27,6 +27,8 @@
 
         <activity android:name=".ui.checkout.CheckoutActivity" />
 
+        <activity android:name=".ui.orders.OrderSummaryActivity" />
+
         <activity android:name=".ui.auth.CreateAccountActivity" />
 
         <activity

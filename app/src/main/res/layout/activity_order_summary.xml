@@ -1,81 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/orderSummaryRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    android:background="#F5F5F5">
 
-    <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@android:drawable/checkbox_on_background"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Order Placed Successfully!"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/success_green"/>
-
-    <androidx.cardview.widget.CardView
+    <!-- Top Section -->
+    <LinearLayout
+        android:id="@+id/topSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginHorizontal="8dp">
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp"
+        android:elevation="2dp"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:id="@+id/iconCircle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            android:background="@color/blipply_green"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <!-- Simple check icon -->
+            <TextView
+                android:id="@+id/textCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textOrderPlaced"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order placed"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/textOrderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#000000"
+            android:textColor="#801A0F2E"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp">
 
-            <TextView
-                android:id="@+id/tvOrderId"
-                android:layout_width="wrap_content"
+            <!-- Status card -->
+            <LinearLayout
+                android:id="@+id/cardStatus"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Order ID: #12345"
-                android:layout_marginBottom="8dp"/>
+                android:orientation="horizontal"
+                android:padding="18dp"
+                android:elevation="1dp"
+                android:layout_marginBottom="12dp">
 
-            <TextView
-                android:id="@+id/tvSummaryTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Amount: $0.00"
-                android:layout_marginBottom="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:textColor="#991A0F2E"
+                    android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvSummaryPayment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Payment Method: Advance"
-                android:layout_marginBottom="8dp"/>
+                <TextView
+                    android:id="@+id/textStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Confirmed"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:gravity="end" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvCreditStatus"
-                android:layout_width="wrap_content"
+            <!-- Payment method card -->
+            <LinearLayout
+                android:id="@+id/cardPayment"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Credit Approved: Yes"
-                android:layout_marginBottom="8dp"/>
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:padding="18dp"
+                android:elevation="1dp"
+                android:layout_marginBottom="12dp">
 
-            <TextView
-                android:id="@+id/tvOrderStatus"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Payment method"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/textPaymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Advance payment"
+                    android:textColor="#991A0F2E"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:id="@+id/creditSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="14dp"
+                    android:paddingTop="14dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Credit used"
+                            android:textColor="#991A0F2E"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/textCreditUsed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R 0.00"
+                            android:textColor="@color/text_primary"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Order items card -->
+            <LinearLayout
+                android:id="@+id/cardItems"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Status: Pending"
-                android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:padding="18dp"
+                android:elevation="1dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order items"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="14dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOrderItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="16dp"
+                    android:paddingTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
+                        android:textColor="@color/text_primary"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textOrderTotal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="R 0.00"
+                        android:textColor="@color/text_primary"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:gravity="end" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
-    <Button
-        android:id="@+id/btnBackToCatalog"
-        style="@style/Blipply.Button"
+    <!-- Bottom button -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_marginTop="32dp"
-        android:text="Return to Catalog"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:elevation="6dp">
+
+        <Button
+            android:id="@+id/buttonBackToProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to products"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:backgroundTint="@color/button_primary"
+            android:textColor="@color/button_primary_text" />
+
+    </LinearLayout>
 
 </LinearLayout>
