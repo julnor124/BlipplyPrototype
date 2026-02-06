@@ -11,8 +11,20 @@ import java.util.UUID;
 
 public class MockDataSource {
 
+    // Mock credit data
+    private final int availableCreditCents = 500000; // R 5000.00
+    private final int usedCreditCents = 125000;      // R 1250.00
+
     public List<Product> getProducts() {
         return MockProducts.getProducts();
+    }
+
+    public int getAvailableCreditCents() {
+        return availableCreditCents;
+    }
+
+    public int getUsedCreditCents() {
+        return usedCreditCents;
     }
 
     public Order createOrder(
@@ -40,7 +52,8 @@ public class MockDataSource {
                 items,
                 totalCents,
                 paymentMethod,
-                status
+                status,
+                null
         );
     }
 }

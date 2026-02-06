@@ -8,19 +8,22 @@ public class Order {
     private final int totalCents;
     private final PaymentMethod paymentMethod;
     private final OrderStatus status;
+    private final Integer creditUsedCents;
 
     public Order(
             String id,
             List<CartItem> items,
             int totalCents,
             PaymentMethod paymentMethod,
-            OrderStatus status
+            OrderStatus status,
+            Integer creditUsedCents
     ) {
         this.id = id;
         this.items = items;
         this.totalCents = totalCents;
         this.paymentMethod = paymentMethod;
         this.status = status;
+        this.creditUsedCents = creditUsedCents;
     }
 
     public String getId() {
@@ -41,5 +44,9 @@ public class Order {
 
     public OrderStatus getStatus() {
         return status;
+    }
+
+    public Integer getCreditUsedCents() {
+        return creditUsedCents;
     }
 }

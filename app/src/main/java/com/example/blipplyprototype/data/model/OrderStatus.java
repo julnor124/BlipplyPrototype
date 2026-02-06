@@ -1,7 +1,8 @@
 package com.example.blipplyprototype.data.model;
 
 public enum OrderStatus {
-    PENDING_PAYMENT,
     CONFIRMED,
-    PAY_ON_DELIVERY
+    PENDING_PAYMENT,
+    PAY_ON_DELIVERY,
+    INSUFFICIENT_CREDIT
 }
