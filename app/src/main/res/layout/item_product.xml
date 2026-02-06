@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/productItemRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:padding="18dp"
+    android:layout_marginBottom="12dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingEnd="12dp">
 
         <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_product_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_main"/>
+            android:text="Product name"
+            android:textColor="@color/text_primary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvProductPrice"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_product_price"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary_brand"
-            android:textStyle="bold"
-            android:layout_marginTop="4dp"/>
-
-        <Button
-            android:id="@+id/btnAddToCart"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add to Cart"
-            android:layout_gravity="end"/>
-
+            android:text="R 0.00"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/button_primary_text" />
+
+</LinearLayout>
