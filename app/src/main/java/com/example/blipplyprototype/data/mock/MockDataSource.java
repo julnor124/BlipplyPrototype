@@ -26,10 +26,10 @@ public class MockDataSource {
             case CREDIT:
                 status = OrderStatus.CONFIRMED;
                 break;
-            case ON_SITE_PAYMENT:
+            case ONSITE:
                 status = OrderStatus.PAY_ON_DELIVERY;
                 break;
-            case ADVANCE_PAYMENT:
+            case ADVANCE:
             default:
                 status = OrderStatus.PENDING_PAYMENT;
                 break;

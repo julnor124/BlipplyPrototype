@@ -1,7 +1,7 @@
 package com.example.blipplyprototype.data.model;
 
 public enum PaymentMethod {
-    ADVANCE_PAYMENT,
+    ADVANCE,
     CREDIT,
-    ON_SITE_PAYMENT
+    ONSITE
 }
