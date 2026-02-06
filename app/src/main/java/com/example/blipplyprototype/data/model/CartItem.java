@@ -1,3 +1,3 @@
 package com.example.blipplyprototype.data.model;
 
-public class Product { }
+public class CartItem { }
