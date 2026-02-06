@@ -25,11 +25,19 @@ import java.util.Locale;
 public class CartActivity extends AppCompatActivity {
 
     private final CartRepository cartRepository = CartRepository.getInstance();
+    private static final double VAT_RATE = 0.15;
+    private static final int DELIVERY_FEE_CENTS = 5000; // KSh 50.00
+    private static final int FREE_DELIVERY_THRESHOLD_CENTS = 50000; // KSh 500.00
 
     private CartAdapter adapter;
-    private TextView textEmpty;
+    private LinearLayout emptyState;
+    private TextView textClearAll;
     private LinearLayout bottomSection;
-    private TextView textTotal;
+    private TextView textSubtotal;
+    private TextView textVat;
+    private TextView textDelivery;
+    private TextView textGrandTotal;
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,13 +45,23 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         ImageButton back = findViewById(R.id.buttonBack);
-        RecyclerView rv = findViewById(R.id.rvCart);
-        textEmpty = findViewById(R.id.textEmpty);
+        rv = findViewById(R.id.rvCart);
+        emptyState = findViewById(R.id.emptyState);
+        textClearAll = findViewById(R.id.textClearAll);
         bottomSection = findViewById(R.id.bottomSection);
-        textTotal = findViewById(R.id.textTotal);
+        textSubtotal = findViewById(R.id.textSubtotal);
+        textVat = findViewById(R.id.textVat);
+        textDelivery = findViewById(R.id.textDelivery);
+        textGrandTotal = findViewById(R.id.textGrandTotal);
         Button checkout = findViewById(R.id.buttonCheckout);
+        Button browse = findViewById(R.id.buttonBrowse);
 
         back.setOnClickListener(v -> finish());
+        textClearAll.setOnClickListener(v -> {
+            cartRepository.clear();
+            refresh();
+        });
+        browse.setOnClickListener(v -> finish());
 
         rv.setLayoutManager(new LinearLayoutManager(this));
 
@@ -82,13 +100,25 @@ public class CartActivity extends AppCompatActivity {
         int count = cartRepository.getItems().size();
 
         if (count == 0) {
-            textEmpty.setVisibility(View.VISIBLE);
+            emptyState.setVisibility(View.VISIBLE);
+            rv.setVisibility(View.GONE);
+            textClearAll.setVisibility(View.GONE);
             bottomSection.setVisibility(View.GONE);
         } else {
-            textEmpty.setVisibility(View.GONE);
+            emptyState.setVisibility(View.GONE);
+            rv.setVisibility(View.VISIBLE);
+            textClearAll.setVisibility(View.VISIBLE);
             bottomSection.setVisibility(View.VISIBLE);
 
-            textTotal.setText(String.format(Locale.US, "KSh %.2f", cartRepository.getTotalCents() / 100.0));
+            int subtotalCents = cartRepository.getTotalCents();
+            int vatCents = (int) Math.round(subtotalCents * VAT_RATE);
+            int deliveryCents = subtotalCents > FREE_DELIVERY_THRESHOLD_CENTS ? 0 : DELIVERY_FEE_CENTS;
+            int grandTotalCents = subtotalCents + vatCents + deliveryCents;
+
+            textSubtotal.setText(String.format(Locale.US, "KSh %.2f", subtotalCents / 100.0));
+            textVat.setText(String.format(Locale.US, "KSh %.2f", vatCents / 100.0));
+            textDelivery.setText(String.format(Locale.US, "KSh %.2f", deliveryCents / 100.0));
+            textGrandTotal.setText(String.format(Locale.US, "KSh %.2f", grandTotalCents / 100.0));
         }
 
         adapter.notifyDataSetChanged();

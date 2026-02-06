@@ -39,6 +39,20 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear all"
+            android:textSize="14sp"
+            android:textColor="#991A0F2E"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <!-- Content area -->
@@ -48,15 +62,51 @@
         android:layout_weight="1">
 
         <!-- Empty state -->
-        <TextView
-            android:id="@+id/textEmpty"
+        <LinearLayout
+            android:id="@+id/emptyState"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Your cart is empty"
-            android:textColor="#661A0F2E"
-            android:textSize="17sp"
+            android:orientation="vertical"
             android:gravity="center"
-            android:visibility="gone" />
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/emptyIcon"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:gravity="center"
+                android:text="🛒"
+                android:textSize="32sp"
+                android:background="#4DD4FF69" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your cart is empty"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add items from the product catalog to get started"
+                android:textColor="#991A0F2E"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_marginBottom="18dp" />
+
+            <Button
+                android:id="@+id/buttonBrowse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Browse Products"
+                android:backgroundTint="@color/button_primary"
+                android:textColor="@color/button_primary_text" />
+        </LinearLayout>
 
         <!-- Cart list -->
         <androidx.recyclerview.widget.RecyclerView
@@ -93,15 +143,15 @@
             android:layout_marginBottom="16dp">
 
             <TextView
-                android:id="@+id/labelTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total"
                 android:textColor="#991A0F2E"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textTotal"
+                android:id="@+id/textGrandTotal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -121,6 +171,81 @@
             android:paddingBottom="14dp"
             android:backgroundTint="@color/button_primary"
             android:textColor="@color/button_primary_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subtotal"
+                android:textColor="#991A0F2E"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textSubtotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="KSh 0.00"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VAT (15%)"
+                android:textColor="#991A0F2E"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textVat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="KSh 0.00"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:gravity="end" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery"
+                android:textColor="#991A0F2E"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textDelivery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="KSh 0.00"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:gravity="end" />
+        </LinearLayout>
 
     </LinearLayout>
 
