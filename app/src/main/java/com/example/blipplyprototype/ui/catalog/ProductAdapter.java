@@ -18,10 +18,16 @@ import java.util.Locale;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private final List<Product> products;
+    public interface OnAddClicked {
+        void onAdd(Product product);
+    }
 
-    public ProductAdapter(List<Product> products) {
+    private final List<Product> products;
+    private final OnAddClicked onAddClicked;
+
+    public ProductAdapter(List<Product> products, OnAddClicked onAddClicked) {
         this.products = products;
+        this.onAddClicked = onAddClicked;
     }
 
     @NonNull
@@ -40,7 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.price.setText(String.format(Locale.US, "R %.2f", product.getPriceCents() / 100.0));
 
         holder.addButton.setOnClickListener(v -> {
-            // intentionally empty in this commit
+            if (onAddClicked != null) onAddClicked.onAdd(product);
         });
     }
 
