@@ -18,6 +18,7 @@ import com.example.blipplyprototype.data.model.Product;
 import com.example.blipplyprototype.data.repository.CartRepository;
 import com.example.blipplyprototype.data.repository.CatalogRepository;
 import com.example.blipplyprototype.ui.cart.CartActivity;
+import com.example.blipplyprototype.ui.profile.ProfileActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -36,6 +37,8 @@ public class ProductCatalogActivity extends AppCompatActivity {
         RecyclerView recycler = findViewById(R.id.rvProducts);
         fabCart = findViewById(R.id.fabCart);
         cartCount = findViewById(R.id.textCartCount);
+        findViewById(R.id.buttonProfile)
+                .setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
 
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
