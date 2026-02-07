@@ -24,6 +24,16 @@
             android:background="@android:color/transparent"
             android:contentDescription="Back"
             android:src="@drawable/ic_back_simple" />
+
+        <TextView
+            android:id="@+id/titleCreateAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create account"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp" />
     </LinearLayout>
 
     <!-- Content -->
@@ -41,16 +51,6 @@
             android:paddingEnd="32dp"
             android:paddingTop="24dp"
             android:paddingBottom="32dp">
-
-            <!-- Title -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Create account"
-                android:textColor="@color/text_primary"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="6dp" />
 
             <TextView
                 android:layout_width="match_parent"
