@@ -25,9 +25,6 @@ import java.util.Locale;
 public class CartActivity extends AppCompatActivity {
 
     private final CartRepository cartRepository = CartRepository.getInstance();
-    private static final double VAT_RATE = 0.15;
-    private static final int DELIVERY_FEE_CENTS = 5000; // KSh 50.00
-    private static final int FREE_DELIVERY_THRESHOLD_CENTS = 50000; // KSh 500.00
 
     private CartAdapter adapter;
     private LinearLayout emptyState;
@@ -110,10 +107,10 @@ public class CartActivity extends AppCompatActivity {
             textClearAll.setVisibility(View.VISIBLE);
             bottomSection.setVisibility(View.VISIBLE);
 
-            int subtotalCents = cartRepository.getTotalCents();
-            int vatCents = (int) Math.round(subtotalCents * VAT_RATE);
-            int deliveryCents = subtotalCents > FREE_DELIVERY_THRESHOLD_CENTS ? 0 : DELIVERY_FEE_CENTS;
-            int grandTotalCents = subtotalCents + vatCents + deliveryCents;
+            int subtotalCents = cartRepository.getSubtotalCents();
+            int vatCents = cartRepository.getVatCents();
+            int deliveryCents = cartRepository.getDeliveryCents();
+            int grandTotalCents = cartRepository.getGrandTotalCents();
 
             textSubtotal.setText(String.format(Locale.US, "KSh %.2f", subtotalCents / 100.0));
             textVat.setText(String.format(Locale.US, "KSh %.2f", vatCents / 100.0));

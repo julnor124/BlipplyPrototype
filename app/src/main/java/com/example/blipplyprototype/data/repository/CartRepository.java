@@ -10,6 +10,9 @@ import java.util.List;
 public class CartRepository {
 
     private static final CartRepository INSTANCE = new CartRepository();
+    private static final double VAT_RATE = 0.15;
+    private static final int DELIVERY_FEE_CENTS = 5000; // KSh 50.00
+    private static final int FREE_DELIVERY_THRESHOLD_CENTS = 50000; // KSh 500.00
 
     private final List<CartItem> items = new ArrayList<>();
 
@@ -61,12 +64,24 @@ public class CartRepository {
         }
     }
 
-    public int getTotalCents() {
+    public int getSubtotalCents() {
         int total = 0;
         for (CartItem item : items) {
             total += item.getProduct().getPriceCents() * item.getQuantity();
         }
         return total;
+    }
+
+    public int getVatCents() {
+        return (int) Math.round(getSubtotalCents() * VAT_RATE);
+    }
+
+    public int getDeliveryCents() {
+        return getSubtotalCents() > FREE_DELIVERY_THRESHOLD_CENTS ? 0 : DELIVERY_FEE_CENTS;
+    }
+
+    public int getGrandTotalCents() {
+        return getSubtotalCents() + getVatCents() + getDeliveryCents();
     }
 
     public void clear() {
