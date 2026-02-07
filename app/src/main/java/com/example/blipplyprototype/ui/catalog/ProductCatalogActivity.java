@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +27,7 @@ public class ProductCatalogActivity extends AppCompatActivity {
     private final CartRepository cartRepository = CartRepository.getInstance();
     private FloatingActionButton fabCart;
     private TextView cartCount;
+    private ProductAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,10 +45,16 @@ public class ProductCatalogActivity extends AppCompatActivity {
         CatalogRepository catalogRepository = new CatalogRepository(new MockDataSource());
         List<Product> products = catalogRepository.getProducts();
 
-        ProductAdapter adapter = new ProductAdapter(products, product -> {
-            cartRepository.addProduct(product);
-            Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
-            updateCartFab();
+        adapter = new ProductAdapter(products, new ProductAdapter.Listener() {
+            @Override
+            public void onQuantityChanged() {
+                updateCartFab();
+            }
+
+            @Override
+            public void onAdd(Product product) {
+                // No toast feedback; handled by inline quantity UI.
+            }
         });
 
         recycler.setAdapter(adapter);
@@ -62,6 +68,9 @@ public class ProductCatalogActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateCartFab();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void updateCartFab() {
