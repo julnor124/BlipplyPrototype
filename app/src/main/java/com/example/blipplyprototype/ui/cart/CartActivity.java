@@ -18,6 +18,7 @@ import com.example.blipplyprototype.R;
 import com.example.blipplyprototype.data.model.CartItem;
 import com.example.blipplyprototype.data.repository.CartRepository;
 import com.example.blipplyprototype.ui.checkout.CheckoutActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 import java.util.Locale;
@@ -78,8 +79,7 @@ public class CartActivity extends AppCompatActivity {
 
             @Override
             public void onRemove(CartItem item) {
-                cartRepository.setQuantity(item.getProduct(), 0);
-                refresh();
+                showRemoveConfirmation(item);
             }
         });
 
@@ -91,6 +91,18 @@ public class CartActivity extends AppCompatActivity {
         });
 
         refresh();
+    }
+
+    private void showRemoveConfirmation(CartItem item) {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Remove item")
+                .setMessage("Remove " + item.getProduct().getName() + " from your cart?")
+                .setPositiveButton("Remove", (dialog, which) -> {
+                    cartRepository.setQuantity(item.getProduct(), 0);
+                    refresh();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void refresh() {
