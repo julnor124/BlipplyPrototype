@@ -54,6 +54,11 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+        if (cartRepository.getItems().isEmpty()) {
+            finish();
+            return;
+        }
+
         remainingCreditCents = availableCreditCents - usedCreditCents;
 
         ImageButton back = findViewById(R.id.buttonBack);
@@ -81,7 +86,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> finish());
 
-        int totalCents = cartRepository.getTotalCents();
+        int totalCents = cartRepository.getGrandTotalCents();
         totalText.setText(String.format(Locale.US, "KSh %.2f", totalCents / 100.0));
 
         availableCredit.setText(String.format(Locale.US, "KSh %.2f", availableCreditCents / 100.0));
@@ -103,7 +108,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
             // simulate AI delay
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                int total = cartRepository.getTotalCents();
+                int total = cartRepository.getGrandTotalCents();
                 aiRecommendation = (total <= remainingCreditCents) ? PaymentMethod.CREDIT : PaymentMethod.ADVANCE;
 
                 aiResultContainer.setVisibility(View.VISIBLE);
@@ -123,12 +128,13 @@ public class CheckoutActivity extends AppCompatActivity {
         });
 
         placeOrder.setOnClickListener(v -> {
-            if (selectedMethod == null) return;
+            if (selectedMethod == null || cartRepository.getItems().isEmpty()) return;
 
             // Next commit will create Order and show status properly.
             Intent intent = new Intent(this, OrderSummaryActivity.class);
             intent.putExtra("payment_method", selectedMethod.name());
             startActivity(intent);
+            finish();
         });
 
         updatePlaceOrderButton();
@@ -145,7 +151,7 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void updatePlaceOrderButton() {
-        boolean enabled = selectedMethod != null;
+        boolean enabled = selectedMethod != null && !cartRepository.getItems().isEmpty();
         placeOrder.setEnabled(enabled);
 
         if (enabled) {
@@ -155,6 +161,21 @@ public class CheckoutActivity extends AppCompatActivity {
             placeOrder.setBackgroundTintList(getColorStateList(android.R.color.darker_gray));
             placeOrder.setTextColor(getColor(android.R.color.white));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (cartRepository.getItems().isEmpty()) {
+            finish();
+            return;
+        }
+
+        int totalCents = cartRepository.getGrandTotalCents();
+        TextView totalText = findViewById(R.id.textTotal);
+        totalText.setText(String.format(Locale.US, "KSh %.2f", totalCents / 100.0));
+        updatePlaceOrderButton();
     }
 
     private String buildAiExplanation(PaymentMethod recommendation, int totalCents) {

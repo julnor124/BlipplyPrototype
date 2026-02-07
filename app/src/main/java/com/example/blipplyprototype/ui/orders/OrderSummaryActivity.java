@@ -42,6 +42,9 @@ public class OrderSummaryActivity extends AppCompatActivity {
         TextView creditUsedText = findViewById(R.id.textCreditUsed);
 
         RecyclerView rv = findViewById(R.id.rvOrderItems);
+        TextView subtotalText = findViewById(R.id.textOrderSubtotal);
+        TextView vatText = findViewById(R.id.textOrderVat);
+        TextView deliveryText = findViewById(R.id.textOrderDelivery);
         TextView totalText = findViewById(R.id.textOrderTotal);
 
         Button backToProducts = findViewById(R.id.buttonBackToProducts);
@@ -50,7 +53,11 @@ public class OrderSummaryActivity extends AppCompatActivity {
         PaymentMethod method = methodName != null ? PaymentMethod.valueOf(methodName) : PaymentMethod.ADVANCE;
 
         OrderRepository orderRepository = new OrderRepository(new MockDataSource());
-        Order order = orderRepository.placeOrder(cartRepository.getItems(), cartRepository.getTotalCents(), method);
+        Order order = orderRepository.placeOrder(
+                cartRepository.getItems(),
+                cartRepository.getGrandTotalCents(),
+                method
+        );
 
         orderId.setText("#" + order.getId());
 
@@ -69,17 +76,27 @@ public class OrderSummaryActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new OrderItemAdapter(order.getItems()));
 
+        subtotalText.setText(String.format(Locale.US, "KSh %.2f", cartRepository.getSubtotalCents() / 100.0));
+        vatText.setText(String.format(Locale.US, "KSh %.2f", cartRepository.getVatCents() / 100.0));
+        deliveryText.setText(String.format(Locale.US, "KSh %.2f", cartRepository.getDeliveryCents() / 100.0));
         totalText.setText(String.format(Locale.US, "KSh %.2f", order.getTotalCents() / 100.0));
 
         // Optional: clear cart after order is placed
         cartRepository.clear();
 
-        backToProducts.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProductCatalogActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-        });
+        backToProducts.setOnClickListener(v -> navigateBackToProducts());
+    }
+
+    @Override
+    public void onBackPressed() {
+        navigateBackToProducts();
+    }
+
+    private void navigateBackToProducts() {
+        Intent intent = new Intent(this, ProductCatalogActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private String paymentLabel(PaymentMethod method) {
