@@ -36,8 +36,7 @@
             android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:contentDescription="Profile"
-            android:src="@android:drawable/ic_menu_myplaces"
-            android:tint="@color/text_primary" />
+            android:src="@drawable/ic_profile_simple" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
