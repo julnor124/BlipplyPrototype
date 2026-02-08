@@ -134,6 +134,7 @@ Mycket hade behövt förbättras i denna app. Om arbetet fortsatte hade nästa s
 - införa MVVM-arkitektur för att lättare kunna skala.
 - lägga till persistent lagring (t.ex. Room eller DataStore).
 - koppla applikationen till ett riktigt backend-API.
+- för ett fintechbolag: Java/Spring Boot med PostgreSQL och JWT‑auth.
 
 När den tekniska grunden var på plats hade det även varit intressant att utveckla funktionaliteten vidare, till exempel:
 
