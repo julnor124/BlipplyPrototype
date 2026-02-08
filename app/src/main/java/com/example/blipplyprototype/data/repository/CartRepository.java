@@ -37,16 +37,6 @@ public class CartRepository {
         items.add(new CartItem(product, 1));
     }
 
-    public void removeProduct(Product product) {
-        for (int i = 0; i < items.size(); i++) {
-            CartItem item = items.get(i);
-            if (item.getProduct().getId().equals(product.getId())) {
-                items.remove(i);
-                return;
-            }
-        }
-    }
-
     public void setQuantity(Product product, int quantity) {
         for (int i = 0; i < items.size(); i++) {
             CartItem item = items.get(i);

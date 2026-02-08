@@ -6,10 +6,6 @@ public class AuthRepository {
         return !isBlank(email) && !isBlank(password);
     }
 
-    public boolean createAccount(String email, String password) {
-        return createAccount("", email, "", password);
-    }
-
     public boolean createAccount(String businessName, String email, String phone, String password) {
         return !isBlank(businessName)
                 && !isBlank(email)

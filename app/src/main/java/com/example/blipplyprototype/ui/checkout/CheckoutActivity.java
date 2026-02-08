@@ -131,7 +131,6 @@ public class CheckoutActivity extends AppCompatActivity {
         placeOrder.setOnClickListener(v -> {
             if (selectedMethod == null || cartRepository.getItems().isEmpty()) return;
 
-            // Next commit will create Order and show status properly.
             Intent intent = new Intent(this, OrderSummaryActivity.class);
             intent.putExtra("payment_method", selectedMethod.name());
             startActivity(intent);
