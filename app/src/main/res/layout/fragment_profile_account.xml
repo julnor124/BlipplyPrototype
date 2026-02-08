@@ -18,6 +18,7 @@
             android:padding="18dp">
 
             <TextView
+                android:id="@+id/textAccountName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="John Doe"
@@ -26,6 +27,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textAccountBusiness"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fresh Mart Grocers"
@@ -36,17 +38,44 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email: john@example.com"
+                android:text="Email"
+                android:textColor="#991A0F2E"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/textAccountEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="john@example.com"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="10dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone: +254 712 345 678"
+                android:text="Phone"
+                android:textColor="#991A0F2E"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/textAccountPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+254 712 345 678"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/buttonEditAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit account details"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/button_primary"
+                android:textColor="@color/button_primary_text" />
 
         </LinearLayout>
     </LinearLayout>
