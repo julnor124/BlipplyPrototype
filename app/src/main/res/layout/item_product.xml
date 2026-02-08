@@ -25,13 +25,22 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/text_product_unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="per unit"
+            android:textColor="#991A0F2E"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
             android:id="@+id/text_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="KSh 0.00"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="6dp" />
     </LinearLayout>
 
     <Button

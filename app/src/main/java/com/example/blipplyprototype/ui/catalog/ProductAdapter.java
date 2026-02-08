@@ -14,6 +14,7 @@ import com.example.blipplyprototype.R;
 import com.example.blipplyprototype.data.model.Product;
 import com.example.blipplyprototype.data.repository.CartRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,7 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private final CartRepository cartRepository = CartRepository.getInstance();
 
     public ProductAdapter(List<Product> products, Listener listener) {
-        this.products = products;
+        this.products = new ArrayList<>(products);
         this.listener = listener;
     }
 
@@ -46,6 +47,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = products.get(position);
 
         holder.name.setText(product.getName());
+        holder.unit.setText(product.getUnit());
         holder.price.setText(String.format(Locale.US, "KSh %.2f", product.getPriceCents() / 100.0));
 
         int quantity = getQuantity(product);
@@ -85,6 +87,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         final TextView name;
+        final TextView unit;
         final TextView price;
         final Button addButton;
         final View quantityContainer;
@@ -95,6 +98,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.text_product_name);
+            unit = itemView.findViewById(R.id.text_product_unit);
             price = itemView.findViewById(R.id.text_product_price);
             addButton = itemView.findViewById(R.id.button_add);
             quantityContainer = itemView.findViewById(R.id.layout_quantity);
@@ -111,5 +115,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
         }
         return 0;
+    }
+
+    public void updateProducts(List<Product> updated) {
+        products.clear();
+        products.addAll(updated);
+        notifyDataSetChanged();
     }
 }
