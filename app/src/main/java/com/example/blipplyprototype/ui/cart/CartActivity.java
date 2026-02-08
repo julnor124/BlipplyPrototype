@@ -56,8 +56,7 @@ public class CartActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> finish());
         textClearAll.setOnClickListener(v -> {
-            cartRepository.clear();
-            refresh();
+            showClearAllConfirmation();
         });
         browse.setOnClickListener(v -> finish());
 
@@ -86,7 +85,6 @@ public class CartActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
 
         checkout.setOnClickListener(v -> {
-            // Next commit will implement the checkout screen details
             startActivity(new Intent(this, CheckoutActivity.class));
         });
 
@@ -99,6 +97,18 @@ public class CartActivity extends AppCompatActivity {
                 .setMessage("Remove " + item.getProduct().getName() + " from your cart?")
                 .setPositiveButton("Remove", (dialog, which) -> {
                     cartRepository.setQuantity(item.getProduct(), 0);
+                    refresh();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showClearAllConfirmation() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Clear cart")
+                .setMessage("Remove all items from your cart?")
+                .setPositiveButton("Clear", (dialog, which) -> {
+                    cartRepository.clear();
                     refresh();
                 })
                 .setNegativeButton("Cancel", null)

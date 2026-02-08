@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.activity.OnBackPressedCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -85,11 +86,13 @@ public class OrderSummaryActivity extends AppCompatActivity {
         cartRepository.clear();
 
         backToProducts.setOnClickListener(v -> navigateBackToProducts());
-    }
 
-    @Override
-    public void onBackPressed() {
-        navigateBackToProducts();
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                navigateBackToProducts();
+            }
+        });
     }
 
     private void navigateBackToProducts() {
@@ -112,7 +115,6 @@ public class OrderSummaryActivity extends AppCompatActivity {
         switch (status) {
             case CONFIRMED: return "Confirmed";
             case PAY_ON_DELIVERY: return "On site payment";
-            case PENDING_PAYMENT: return "Pending payment";
             case INSUFFICIENT_CREDIT: return "Pending payment";
             default: return status.name();
         }
