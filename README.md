@@ -67,6 +67,7 @@ Detta är en prototyp och flera förenklingar har därför gjorts:
 - Ingen persistent lagring används, all state hålls i minnet  
 - Applikationen återställs vid omstart  
 - Utvecklingen har skett på en och samma git-branch för enkelhet i prototypfasen och för att jag varit själv med att committa.
+- Jag har försökt hålla logiska, beskrivande commits per funktion eller ändring.
 
 Dessa avgränsningar gjordes för att kunna fokusera på huvudflöden, struktur och tydlighet snarare än full implementation. Dessa saker skulle givetvis fixas i en verklig app.
 
