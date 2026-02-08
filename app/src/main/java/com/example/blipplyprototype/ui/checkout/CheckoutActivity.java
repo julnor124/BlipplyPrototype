@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.blipplyprototype.R;
+import com.example.blipplyprototype.data.mock.MockDataSource;
 import com.example.blipplyprototype.data.model.PaymentMethod;
 import com.example.blipplyprototype.data.repository.CartRepository;
 import com.example.blipplyprototype.ui.orders.OrderSummaryActivity;
@@ -24,12 +25,10 @@ import java.util.Locale;
 public class CheckoutActivity extends AppCompatActivity {
 
     private static final CartRepository cartRepository = CartRepository.getInstance();
+    private final MockDataSource dataSource = new MockDataSource();
 
     private PaymentMethod selectedMethod = null;
 
-    // Mock credit
-    private final int availableCreditCents = 500000; // KSh 5000.00
-    private final int usedCreditCents = 125000;      // KSh 1250.00
     private int remainingCreditCents;
 
     private Button placeOrder;
@@ -59,6 +58,8 @@ public class CheckoutActivity extends AppCompatActivity {
             return;
         }
 
+        int availableCreditCents = dataSource.getAvailableCreditCents();
+        int usedCreditCents = dataSource.getUsedCreditCents();
         remainingCreditCents = availableCreditCents - usedCreditCents;
 
         ImageButton back = findViewById(R.id.buttonBack);
