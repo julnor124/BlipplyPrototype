@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cartItemRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
             android:background="@android:color/transparent"
             android:contentDescription="Remove"
             android:src="@android:drawable/ic_menu_delete"
-            android:tint="#661A0F2E" />
+            app:tint="#661A0F2E" />
     </LinearLayout>
 
     <!-- Bottom row: quantity controls + line total -->
