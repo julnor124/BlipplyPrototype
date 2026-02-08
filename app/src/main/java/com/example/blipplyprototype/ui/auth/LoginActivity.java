@@ -2,6 +2,9 @@ package com.example.blipplyprototype.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,9 +31,16 @@ public class LoginActivity extends AppCompatActivity {
 
         AuthRepository authRepository = new AuthRepository();
 
+        emailInput.addTextChangedListener(clearErrorWatcher(emailInput));
+        passwordInput.addTextChangedListener(clearErrorWatcher(passwordInput));
+
         loginButton.setOnClickListener(v -> {
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
+
+            if (!validateLogin(emailInput, passwordInput, email, password)) {
+                return;
+            }
 
             boolean success = authRepository.login(email, password);
 
@@ -48,5 +58,46 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CreateAccountActivity.class);
             startActivity(intent);
         });
+    }
+
+    private boolean validateLogin(EditText emailInput, EditText passwordInput, String email, String password) {
+        if (email.isEmpty()) {
+            emailInput.setError("Email is required");
+            emailInput.requestFocus();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailInput.setError("Enter a valid email");
+            emailInput.requestFocus();
+            return false;
+        }
+        if (password.isEmpty()) {
+            passwordInput.setError("Password is required");
+            passwordInput.requestFocus();
+            return false;
+        }
+        if (password.length() < 6) {
+            passwordInput.setError("Password must be at least 6 characters");
+            passwordInput.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private TextWatcher clearErrorWatcher(EditText input) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                input.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        };
     }
 }
